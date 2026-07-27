@@ -316,6 +316,14 @@ export default function QuarantinePage() {
                           </td>
                           <td className="px-6 py-3.5 text-right">
                             <div className="flex items-center gap-1.5 justify-end">
+                              <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-2.5 py-1 bg-slate-800 hover:bg-blue-500/20 hover:text-blue-400 text-slate-300 rounded text-xs transition-colors border border-slate-700"
+                              >
+                                Visit
+                              </a>
                               <button
                                 onClick={() => handleValidateIndividual(item.quarantine_id, 'validated_safe')}
                                 disabled={actionLoading === item.quarantine_id}
@@ -379,6 +387,14 @@ export default function QuarantinePage() {
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex gap-2 justify-end">
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded border border-blue-500/20 text-xs font-semibold transition-colors inline-flex items-center"
+                        >
+                          🌐 Visit
+                        </a>
                         <button
                           onClick={() => handleValidateIndividual(item.quarantine_id, 'validated_safe')}
                           disabled={actionLoading === item.quarantine_id}
