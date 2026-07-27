@@ -62,14 +62,20 @@ export default function QuarantinePage() {
   const handleValidateIndividual = async (id: number, status: string) => {
     setActionLoading(id);
     try {
-      await fetch(`${API_BASE}/quarantine/${id}/validate`, {
+      const res = await fetch(`${API_BASE}/quarantine/${id}/validate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status, validated_by: 'admin_dashboard' })
       });
+      if (res.ok) {
+        alert("Validasi individu berhasil disimpan.");
+      } else {
+        alert("Gagal memvalidasi individu.");
+      }
       fetchClusters();
     } catch (e) {
       console.error(e);
+      alert("Terjadi kesalahan jaringan");
     } finally {
       setActionLoading(null);
     }
@@ -82,14 +88,21 @@ export default function QuarantinePage() {
 
     const clusterId = parseInt(clusterIdMatch[1]);
     try {
-      await fetch(`${API_BASE}/quarantine/cluster/${clusterId}/validate`, {
+      const res = await fetch(`${API_BASE}/quarantine/cluster/${clusterId}/validate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status, validated_by: 'admin_dashboard' })
       });
+      if (res.ok) {
+        const data = await res.json();
+        alert(data.message);
+      } else {
+        alert("Gagal memvalidasi cluster");
+      }
       fetchClusters();
     } catch (e) {
       console.error(e);
+      alert("Terjadi kesalahan jaringan");
     } finally {
       setActionLoading(null);
     }
